@@ -35,8 +35,7 @@ public class Foundation extends Activity {
             while (myProgress < 100) {
                 try {
                     myHandle.sendMessage(myHandle.obtainMessage());
-                    Thread.sleep(10);
-                    if (myProgress == 100){myProgressBar.setVisibility(View.INVISIBLE);}
+                    Thread.sleep(20);
                 } catch (Throwable t) {
                 }
             }
@@ -49,6 +48,7 @@ public class Foundation extends Activity {
                 // TODO Auto-generated method stub
                 myProgress++;
                 myProgressBar.setProgress(myProgress);
+                if (myProgress==100){myProgressBar.setVisibility(View.INVISIBLE);}
             }
         };
     };
