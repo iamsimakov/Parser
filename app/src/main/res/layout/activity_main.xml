@@ -9,7 +9,8 @@
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_below="@+id/progressBar"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:autoText="false"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -17,18 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Старт"
         android:id="@+id/btn_start"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginTop="88dp" />
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminate="false" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

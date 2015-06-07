@@ -16,9 +16,6 @@ import android.os.Message;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar myProgressBar;
-    int myProgress = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,39 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Intent Found = new Intent(getApplicationContext(), Foundation.class);
                 startActivity(Found);
+
             }
         });
-
-        myProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        new Thread(myThread).start();
 
 
     }
 
-
-    private Runnable myThread = new Runnable() {
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            while (myProgress < 100) {
-                try {
-                    myHandle.sendMessage(myHandle.obtainMessage());
-                    Thread.sleep(500);
-                } catch (Throwable t) {
-                }
-            }
-        }
-
-        Handler myHandle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                // TODO Auto-generated method stub
-                myProgress++;
-                myProgressBar.setProgress(myProgress);
-            }
-        };
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
