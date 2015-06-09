@@ -32,6 +32,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by alexey.simakov on 06.06.2015.
@@ -267,33 +269,44 @@ public class Foundation extends Activity {
         protected void onPostExecute(String strJson) {
             super.onPostExecute(strJson);
             // выводим целиком полученную json-строку
-            Log.d(LOG_TAG, strJson);
+            //Log.d(LOG_TAG, strJson);
 
 
             String strres = "";
-            strres += strJson;
+            //strres += strJson;
 
-            TextView textView = (TextView) findViewById(R.id.textout);
-            textView.setText(strres);
+            //TextView textView = (TextView) findViewById(R.id.textout);
+            //textView.setText(strres);
 
             JSONObject dataJsonObj = null;
-            String secondName = "";
-            /*
+            //String firstname = "";
+
             try {
                 dataJsonObj = new JSONObject(strJson);
-                JSONArray friends = dataJsonObj.getJSONArray("friends");
+                JSONArray widgets = dataJsonObj.getJSONArray("widgets");
 
                 // 1. достаем инфо о втором друге - индекс 1
-                JSONObject secondFriend = friends.getJSONObject(1);
-                secondName = secondFriend.getString("name");
-                Log.d(LOG_TAG, "Второе имя: " + secondName);
-                strres += "Второе имя: " + secondName;
+                //String firstobj = widgets.getJSONObject(0).getString("nid");
+                //firstname = firstobj.toString();
+                //Log.d(LOG_TAG, "Второе имя: " + firstname);
+                //strres += "nid: " + firstobj;
                 // 2. перебираем и выводим контакты каждого друга
-                for (int i = 0; i < friends.length(); i++) {
-                    JSONObject friend = friends.getJSONObject(i);
 
-                    JSONObject contacts = friend.getJSONObject("contacts");
+                for (int i = 0; i < widgets.length(); i++) {
+                    JSONObject widget = widgets.getJSONObject(i);
 
+                    String nid = widget.getString("nid");
+                    Date time = new Date(widget.getString("time"));
+                    String title = widget.getString("title");
+                    String sport_id = widget.getString("sport_id");
+                    String type = widget.getString("type");
+                    String id = widget.getString("id");
+                    String event_id = widget.getString("event_id");
+                    String desc = widget.getString("desc");
+
+                    strres += "Элемент " + i + " nid: " + nid + " time: " + time + " title: " + title + " sport_id: " +
+                            sport_id + " type: " + type + " id: " + id + " event_id: " + event_id + " desc: " + desc;
+                    /*
                     String phone = contacts.getString("mobile");
                     String email = contacts.getString("email");
                     String skype = contacts.getString("skype");
@@ -304,16 +317,17 @@ public class Foundation extends Activity {
                     strres += "email: " + email;
                     Log.d(LOG_TAG, "skype: " + skype);
                     strres += "skype: " + skype;
-
+                    */
                     TextView textView = (TextView) findViewById(R.id.textout);
                     textView.setText(strres);
                 }
+
 
             } catch (JSONException e) {
                 TextView textView = (TextView) findViewById(R.id.textout);
                 textView.setText(e.toString());
             }
-            */
+
         }
     }
 
