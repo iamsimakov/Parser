@@ -295,19 +295,30 @@ public class Foundation extends Activity {
                 for (int i = 0; i < widgets.length(); i++) {
                     JSONObject widget = widgets.getJSONObject(i);
 
-                    String nid = widget.getString("nid");
-                    Date time = new Date(widget.getString("time"));
-                    String title = widget.getString("title");
-                    String sport_id = widget.getString("sport_id");
-                    String type = widget.getString("type");
-                    String id = widget.getString("id");
-                    String event_id = widget.getString("event_id");
-                    String desc = widget.getString("desc");
+                    String nid = null;
+                    if (widget.has("nid")) nid = " nid: " + widget.getString("nid");
 
-                    strres += "Элемент " + i + " nid: " + nid + " time: " + time + " title: " + title + " sport_id: " +
-                            sport_id + " type: " + type + " id: " + id + " event_id: " + event_id + " desc: " + desc;
+
+                    Date time = new Date();
+                    if (widget.has("time")) time.setTime(widget.getLong("time"));
+                    String strtime =  time.toString();
+
+                    String title = null;
+                    if (widget.has("title")) title = " title: " + widget.getString("title");
+
+
+                    //String sport_id = widget.getString("sport_id");
+                    //String type = widget.getString("type");
+                    //long id = Long.parseLong(widget.getString("id"));
+                    //int event_id = Integer.parseInt(widget.getString("event_id"));
+                    //String desc = widget.getString("desc");
+
+                    //strres += "Элемент " + i + " nid: " + nid + " time: " + mydate.getTime() + " title: " + title + " sport_id: " + sport_id + " type: " + type + " id: " + id + " event_id: " + event_id + " desc: " + desc;
+                    strres += " Элемент " + i + nid + strtime + title;
+
                     /*
                     String phone = contacts.getString("mobile");
+
                     String email = contacts.getString("email");
                     String skype = contacts.getString("skype");
 
