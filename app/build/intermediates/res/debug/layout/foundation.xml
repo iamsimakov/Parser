@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:id="@+id/lay_sec">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_margin="0dp" />
+
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/progressBar2"
+        android:layout_alignEnd="@+id/progressBar2"
+        android:touchscreenBlocksFocus="true"
+        android:transitionGroup="true"
+        android:nestedScrollingEnabled="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:fillViewport="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/progressBar2">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/out_text"
+            android:id="@+id/textout"
+            android:editable="false"
+            android:enabled="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:linksClickable="true"
+            android:textIsSelectable="true"
+            android:clickable="true"
+            android:nestedScrollingEnabled="true"
+            android:longClickable="true"
+            android:layout_below="@+id/progressBar2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </ScrollView>
+
+</RelativeLayout><!-- From: file:/D:/Android/Projects/Parser2/Parser/app/src/main/res/layout/foundation.xml -->

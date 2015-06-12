@@ -2,14 +2,26 @@ package com.example.iamsimakov.myproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -49,13 +61,18 @@ public class Foundation extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.foundation);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.foundation);
         new ParseTask().execute();
 
         myProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
         new Thread(myThread).start();
         myProgressBar.setVisibility(View.VISIBLE);
+
+        //addWidget("Очень длиннннннная строка");
+        //TextView textView = (TextView) findViewById(R.id.textout);
+        //
+        //textView.setTextAppearance(getApplicationContext(), R.style.mystyle);
 /*
         try {
             load();
@@ -66,6 +83,7 @@ public class Foundation extends Activity {
         }
 */
     }
+
 
     private Runnable myThread = new Runnable() {
         @Override
@@ -296,43 +314,54 @@ public class Foundation extends Activity {
                     JSONObject widget = widgets.getJSONObject(i);
 
                     String nid = null;
-                    if (widget.has("nid")) nid = " nid: " + widget.getString("nid");
-
+                    if (widget.has("nid")) nid = widget.getString("nid") + "\n";
 
                     Date time = new Date();
                     if (widget.has("time")) time.setTime(widget.getLong("time"));
-                    String strtime =  time.toString();
+                    String str_time =  time.toString() + "\n";
 
                     String title = null;
-                    if (widget.has("title")) title = " title: " + widget.getString("title");
+                    if (widget.has("title")) title = widget.getString("title") + "\n";
+
+                    String sport_id = null;
+                    if (widget.has("sport_id")) sport_id = widget.getString("sport_id") + "\n";
+
+                    String type = null;
+                    if (widget.has("type")) type = widget.getString("type") + "\n";
 
 
-                    //String sport_id = widget.getString("sport_id");
-                    //String type = widget.getString("type");
-                    //long id = Long.parseLong(widget.getString("id"));
-                    //int event_id = Integer.parseInt(widget.getString("event_id"));
-                    //String desc = widget.getString("desc");
+                    long id = 0;
+                    if (widget.has("id")) id = widget.getLong("id");
+                    String str_id = id + "\n";
+
+                    int event_id = 0;
+                    if (widget.has("event_id")) event_id = widget.getInt("event_id");
+                    String str_event_id = event_id + "\n";
+
+                    String desc = null;
+                    if (widget.has("desc")) desc = widget.getString("desc") + "\n";
 
                     //strres += "Элемент " + i + " nid: " + nid + " time: " + mydate.getTime() + " title: " + title + " sport_id: " + sport_id + " type: " + type + " id: " + id + " event_id: " + event_id + " desc: " + desc;
-                    strres += " Элемент " + i + nid + strtime + title;
+                    String str_widget = " Элемент " + i + ":\n" + nid + str_time + title + sport_id + type + str_id + str_event_id + desc;
+                    //if (i % 2 == 0) str_widget = "<p><b>" + str_widget + "</b></p>";
 
-                    /*
-                    String phone = contacts.getString("mobile");
 
-                    String email = contacts.getString("email");
-                    String skype = contacts.getString("skype");
+                    strres += str_widget;
 
-                    Log.d(LOG_TAG, "phone: " + phone);
-                    strres += "phone: " + phone;
-                    Log.d(LOG_TAG, "email: " + email);
-                    strres += "email: " + email;
-                    Log.d(LOG_TAG, "skype: " + skype);
-                    strres += "skype: " + skype;
-                    */
-                    TextView textView = (TextView) findViewById(R.id.textout);
-                    textView.setText(strres);
+
+
                 }
 
+                //for (int i =0; i<4; i++)
+
+                addWidget(strres);
+
+                /*
+                Spanned spn = Html.fromHtml(strres);
+                TextView textView = (TextView) findViewById(R.id.textout);
+                textView.setText(spn);
+
+                */
 
             } catch (JSONException e) {
                 TextView textView = (TextView) findViewById(R.id.textout);
@@ -340,6 +369,20 @@ public class Foundation extends Activity {
             }
 
         }
+    }
+
+    public void addWidget(String str){
+
+        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.lay_sec);
+        TextView mTextView = new TextView(getApplicationContext());
+        mTextView.setText(str);
+
+        mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle1);
+        mTextView.setBackgroundResource(R.color.color_type1);
+
+        ScrollView scrollView = (ScrollView) mainLayout.findViewById(R.id.scrollView);
+        scrollView.addView(mTextView);
+
     }
 
 }
