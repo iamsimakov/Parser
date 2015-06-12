@@ -1543,7 +1543,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c003d;
         public static final int action_mode_bar_stub=0x7f0c003c;
         public static final int action_mode_close_button=0x7f0c0025;
-        public static final int action_settings=0x7f0c0062;
+        public static final int action_settings=0x7f0c0061;
         public static final int activity_chooser_view_content=0x7f0c0026;
         public static final int alertTitle=0x7f0c0030;
         public static final int always=0x7f0c0016;
@@ -1564,7 +1564,7 @@ containing a value of this type.
         public static final int dropdown=0x7f0c001c;
         public static final int edit_query=0x7f0c0042;
         public static final int end=0x7f0c0014;
-        public static final int end_padder=0x7f0c0061;
+        public static final int end_padder=0x7f0c0060;
         public static final int expand_activities_button=0x7f0c0027;
         public static final int expanded_menu=0x7f0c0037;
         public static final int home=0x7f0c0004;
@@ -1572,7 +1572,7 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int info=0x7f0c0060;
+        public static final int info=0x7f0c0053;
         public static final int lay_main=0x7f0c004f;
         public static final int lay_sec=0x7f0c0052;
         public static final int line1=0x7f0c005a;
@@ -1586,7 +1586,7 @@ containing a value of this type.
         public static final int none=0x7f0c000e;
         public static final int normal=0x7f0c000a;
         public static final int parentPanel=0x7f0c002d;
-        public static final int progressBar2=0x7f0c0053;
+        public static final int progressBar=0x7f0c0054;
         public static final int progress_circular=0x7f0c0005;
         public static final int progress_horizontal=0x7f0c0006;
         public static final int radio=0x7f0c003a;
@@ -1618,7 +1618,6 @@ containing a value of this type.
         public static final int text2=0x7f0c005d;
         public static final int textSpacerNoButtons=0x7f0c0033;
         public static final int textView=0x7f0c0050;
-        public static final int textout=0x7f0c0054;
         public static final int time=0x7f0c005b;
         public static final int title=0x7f0c002c;
         public static final int title_template=0x7f0c002f;

@@ -65,7 +65,7 @@ public class Foundation extends Activity {
         setContentView(R.layout.foundation);
         new ParseTask().execute();
 
-        myProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        myProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         new Thread(myThread).start();
         myProgressBar.setVisibility(View.VISIBLE);
 
@@ -346,15 +346,15 @@ public class Foundation extends Activity {
                     //if (i % 2 == 0) str_widget = "<p><b>" + str_widget + "</b></p>";
 
 
-                    strres += str_widget;
+                    //strres += str_widget;
 
-
+                    addWidget(str_widget, i % 2);
 
                 }
 
                 //for (int i =0; i<4; i++)
 
-                addWidget(strres);
+                //addWidget(strres);
 
                 /*
                 Spanned spn = Html.fromHtml(strres);
@@ -364,24 +364,33 @@ public class Foundation extends Activity {
                 */
 
             } catch (JSONException e) {
-                TextView textView = (TextView) findViewById(R.id.textout);
-                textView.setText(e.toString());
+                //TextView textView = (TextView) findViewById(R.id.textout);
+                //textView.setText(e.toString());
             }
 
         }
     }
 
-    public void addWidget(String str){
+    public void addWidget(String str, int i){
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.lay_sec);
         TextView mTextView = new TextView(getApplicationContext());
         mTextView.setText(str);
 
-        mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle1);
-        mTextView.setBackgroundResource(R.color.color_type1);
+        if (i == 0) {
+            mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle1);
+            mTextView.setBackgroundResource(R.color.color_type1);
+        }
+        else{
+            mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle2);
+            mTextView.setBackgroundResource(R.color.color_type2);
+        }
+        //mainLayout.addView(mTextView);
 
         ScrollView scrollView = (ScrollView) mainLayout.findViewById(R.id.scrollView);
-        scrollView.addView(mTextView);
+
+        LinearLayout linearLayout = (LinearLayout) scrollView.findViewById(R.id.info);
+        linearLayout.addView(mTextView);
 
     }
 

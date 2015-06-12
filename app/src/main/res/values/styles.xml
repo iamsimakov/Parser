@@ -7,7 +7,7 @@
     </style>
 
     <style name="mystyle1">
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">#555</item>
@@ -17,7 +17,7 @@
     </style>
 
     <style name="mystyle2">
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">#555</item>
