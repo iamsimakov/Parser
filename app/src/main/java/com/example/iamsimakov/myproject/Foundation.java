@@ -1,59 +1,36 @@
 package com.example.iamsimakov.myproject;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-import android.util.Log;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.io.IOException;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Date;
-import java.util.Objects;
+
 
 /**
  * Created by alexey.simakov on 06.06.2015.
  */
 public class Foundation extends Activity {
-
-    public static String LOG_TAG = "my_log";
-    public static final String PARSE_URL = "http://ya.ru";
 
     ProgressBar myProgressBar;
     int myProgress = 0;
@@ -69,19 +46,6 @@ public class Foundation extends Activity {
         new Thread(myThread).start();
         myProgressBar.setVisibility(View.VISIBLE);
 
-        //addWidget("Очень длиннннннная строка");
-        //TextView textView = (TextView) findViewById(R.id.textout);
-        //
-        //textView.setTextAppearance(getApplicationContext(), R.style.mystyle);
-/*
-        try {
-            load();
-        }
-        catch (Throwable t) {
-            TextView textView = (TextView) findViewById(R.id.textout);
-            textView.setText(t.toString());
-        }
-*/
     }
 
 
@@ -92,11 +56,11 @@ public class Foundation extends Activity {
             while (myProgress < 100) {
                 try {
                     myHandle.sendMessage(myHandle.obtainMessage());
-                    Thread.sleep(20);
+                    Thread.sleep(10);
                 } catch (Throwable t) {
                 }
             }
-            //JSONObject jsonObject = onNewIntent();
+
         }
 
         Handler myHandle = new Handler() {
@@ -109,145 +73,6 @@ public class Foundation extends Activity {
             }
         };
     };
-
-    public void load(){
-        /*
-        String jsonText = "{\"name\":\"Мурзик\",\"color\":-16777216,\"age\":9}";
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-        Cat murzik = gson.fromJson(jsonText, Cat.class);
-        TextView textView = (TextView) findViewById(R.id.textout);
-        textView.setText("GSON "+ "Имя: " + murzik.name + "\nВозраст: " + murzik.age);
-        */
-/*
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
-        String resultJson = "";
-
-        try {
-            URL url = new URL("http://ya.ru");
-
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
-
-            InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
-
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
-            }
-
-            TextView textView = (TextView) findViewById(R.id.textout);
-
-            resultJson = buffer.toString();
-            textView.setText(buffer.toString() + " 6" + " " + isNetworkOnline(this));
-        } catch (Exception e) {
-            TextView textView = (TextView) findViewById(R.id.textout);
-            textView.setText(e.toString() + " " + isNetworkOnline(this));
-        }
-*/
-        //String outstr = buffer.toString();
-
-        //String str = "";
-        /*
-        TwitterTrends trends = new Gson().fromJson(str, TwitterTrends.class);
-        for (int counter = 0; counter < trends.getTrends().length; counter++) {
-            outstr += trends.getTrends(counter);
-        }
-        */
-        //textView.setText(resultJson+" 6");
-    }
-
-    public boolean isNetworkOnline(Context context) {
-        boolean status = false;
-        try {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getNetworkInfo(0);
-            if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED) {
-                status = true;
-            } else {
-                netInfo = cm.getNetworkInfo(1);
-                if (netInfo != null && netInfo.getState() == NetworkInfo.State.CONNECTED)
-                    status = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return status;
-
-    }
-
-    public class Cat {
-
-        public String name; // имя
-        public int age; // возраст
-        public int color; // цвет
-
-        // Конструктор
-        public Cat(){
-
-        }
-    }
-
-    static class TwitterTrends {
-        private String as_of;
-        private Trends[] trends;
-
-        public String getAs_of() {
-            return as_of;
-        }
-
-        public void setAs_of(String as_of) {
-            this.as_of = as_of;
-        }
-
-        public Trends[] getTrends() {
-            return trends;
-        }
-
-        public Trends getTrends(int counter) {
-            return trends[counter];
-        }
-
-        public void setTrends(Trends[] trends) {
-            this.trends = trends;
-        }
-
-        public String toString() {
-            return "Trends at " + as_of + ". Count: " + trends.length;
-        }
-
-        static class Trends {
-            private String name;
-            private String url;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String toString() {
-                return "name: " + name + "; url: " + url;
-            }
-        }
-    }
 
     private class ParseTask extends AsyncTask<Void, Void, String> {
 
@@ -286,112 +111,135 @@ public class Foundation extends Activity {
         @Override
         protected void onPostExecute(String strJson) {
             super.onPostExecute(strJson);
-            // выводим целиком полученную json-строку
-            //Log.d(LOG_TAG, strJson);
-
-
-            String strres = "";
-            //strres += strJson;
-
-            //TextView textView = (TextView) findViewById(R.id.textout);
-            //textView.setText(strres);
 
             JSONObject dataJsonObj = null;
-            //String firstname = "";
 
             try {
                 dataJsonObj = new JSONObject(strJson);
                 JSONArray widgets = dataJsonObj.getJSONArray("widgets");
 
-                // 1. достаем инфо о втором друге - индекс 1
-                //String firstobj = widgets.getJSONObject(0).getString("nid");
-                //firstname = firstobj.toString();
-                //Log.d(LOG_TAG, "Второе имя: " + firstname);
-                //strres += "nid: " + firstobj;
-                // 2. перебираем и выводим контакты каждого друга
-
                 for (int i = 0; i < widgets.length(); i++) {
                     JSONObject widget = widgets.getJSONObject(i);
 
-                    String nid = null;
-                    if (widget.has("nid")) nid = widget.getString("nid") + "\n";
-
-                    Date time = new Date();
-                    if (widget.has("time")) time.setTime(widget.getLong("time"));
-                    String str_time =  time.toString() + "\n";
-
-                    String title = null;
-                    if (widget.has("title")) title = widget.getString("title") + "\n";
-
-                    String sport_id = null;
-                    if (widget.has("sport_id")) sport_id = widget.getString("sport_id") + "\n";
-
                     String type = null;
-                    if (widget.has("type")) type = widget.getString("type") + "\n";
+                    if (widget.has("type")) type = widget.getString("type");
 
+                    if (type.equals("person")){
+                        JSONObject content = new JSONObject();
+                        if (widget.has("content")) content = widget.getJSONObject("content");
 
-                    long id = 0;
-                    if (widget.has("id")) id = widget.getLong("id");
-                    String str_id = id + "\n";
+                            JSONArray person = new JSONArray();
+                            if (content.has("person")) person = content.getJSONArray("person");
 
-                    int event_id = 0;
-                    if (widget.has("event_id")) event_id = widget.getInt("event_id");
-                    String str_event_id = event_id + "\n";
+                                JSONObject img = new JSONObject();
+                                if (person.getJSONObject(0).has("img")) img = person.getJSONObject(0).getJSONObject("img");
 
-                    String desc = null;
-                    if (widget.has("desc")) desc = widget.getString("desc") + "\n";
+                                    String img_url = null;
+                                    if (img.has("url")) img_url = img.getString("url");
 
-                    //strres += "Элемент " + i + " nid: " + nid + " time: " + mydate.getTime() + " title: " + title + " sport_id: " + sport_id + " type: " + type + " id: " + id + " event_id: " + event_id + " desc: " + desc;
-                    String str_widget = " Элемент " + i + ":\n" + nid + str_time + title + sport_id + type + str_id + str_event_id + desc;
-                    //if (i % 2 == 0) str_widget = "<p><b>" + str_widget + "</b></p>";
+                                    String img_desc = null;
+                                    if (person.getJSONObject(0).has("text")) img_desc = person.getJSONObject(0).getString("text");
 
+                                String desc = null;
+                                if (content.has("text")) desc = content.getString("text");
 
-                    //strres += str_widget;
+                        addWidget("textview", "Люди", 2);
+                        addWidget("imageview", img_url, 0);
+                        addWidget("textview", img_desc, 0);
+                        addWidget("textview", desc, 0);
 
-                    addWidget(str_widget, i % 2);
+                    }
+                    if (type.equals("news")){
+                        JSONObject img = new JSONObject();
+                        if (widget.has("img")) img = widget.getJSONObject("img");
 
+                            String img_url = null;
+                            if (img.has("url")) img_url = img.getString("url");
+
+                        String desc = null;
+                        if (widget.has("desc")) desc = widget.getString("desc") + "\n";
+                        addWidget("textview", "Новости", 2);
+                        addWidget("imageview", img_url, 1);
+                        addWidget("textview", desc, 1);
+
+                    }
                 }
 
-                //for (int i =0; i<4; i++)
-
-                //addWidget(strres);
-
-                /*
-                Spanned spn = Html.fromHtml(strres);
-                TextView textView = (TextView) findViewById(R.id.textout);
-                textView.setText(spn);
-
-                */
-
             } catch (JSONException e) {
-                //TextView textView = (TextView) findViewById(R.id.textout);
-                //textView.setText(e.toString());
             }
 
         }
     }
 
-    public void addWidget(String str, int i){
+    public void addWidget(String typeofwidget, String str, int i){
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.lay_sec);
-        TextView mTextView = new TextView(getApplicationContext());
-        mTextView.setText(str);
-
-        if (i == 0) {
-            mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle1);
-            mTextView.setBackgroundResource(R.color.color_type1);
-        }
-        else{
-            mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle2);
-            mTextView.setBackgroundResource(R.color.color_type2);
-        }
-        //mainLayout.addView(mTextView);
-
         ScrollView scrollView = (ScrollView) mainLayout.findViewById(R.id.scrollView);
-
         LinearLayout linearLayout = (LinearLayout) scrollView.findViewById(R.id.info);
-        linearLayout.addView(mTextView);
+        if (typeofwidget.equals("textview")) {
 
+            TextView mTextView = new TextView(getApplicationContext());
+            mTextView.setText(str);
+            if (i == 2) {
+                mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle3);
+                mTextView.setBackgroundResource(R.color.color_type3);
+                mTextView.setPadding(0, 0, 0, 0);
+            }
+            else if (i == 0) {
+                mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle1);
+                mTextView.setBackgroundResource(R.color.color_type1);
+                mTextView.setPadding(0, 0, 0, 10);
+            } else {
+                mTextView.setTextAppearance(getApplicationContext(), R.style.mystyle2);
+                mTextView.setBackgroundResource(R.color.color_type2);
+                mTextView.setPadding(0, 0, 0, 10);
+            }
+            linearLayout.addView(mTextView);
+
+        }
+
+        if (typeofwidget.equals("imageview")) {
+            try {
+                ImageView myimage2 = new ImageView(getApplicationContext());
+                new LoadImagefromUrl().execute(myimage2, str);
+                linearLayout.addView(myimage2);
+            } catch (Exception e) {
+            }
+        }
     }
+
+    private class LoadImagefromUrl extends AsyncTask< Object, Void, Bitmap > {
+        ImageView ivPreview = null;
+
+        @Override
+        protected Bitmap doInBackground( Object... params ) {
+            this.ivPreview = (ImageView) params[0];
+            String url = (String) params[1];
+            System.out.println(url);
+            return loadBitmap( url );
+        }
+
+        @Override
+        protected void onPostExecute( Bitmap result ) {
+            super.onPostExecute( result );
+            ivPreview.setImageBitmap( result );
+        }
+    }
+
+    public Bitmap loadBitmap( String url ) {
+        URL newurl = null;
+        Bitmap bitmap = null;
+        try {
+            newurl = new URL( url );
+            bitmap = BitmapFactory.decodeStream( newurl.openConnection( ).getInputStream( ) );
+        } catch ( MalformedURLException e ) {
+            e.printStackTrace( );
+        } catch ( IOException e ) {
+
+            e.printStackTrace( );
+        }
+        return bitmap;
+    }
+
 
 }

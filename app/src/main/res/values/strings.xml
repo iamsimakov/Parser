@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Parser</string>
+    <string name="app_name">News Parser</string>
 
     <string name="hello_world">Всем привет!</string>
     <string name="action_settings">Settings</string>
