@@ -1,6 +1,7 @@
 package com.example.iamsimakov.myproject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -24,7 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.io.IOException;
-
+import java.security.PrivilegedAction;
 
 
 /**
@@ -33,7 +34,7 @@ import java.io.IOException;
 public class Foundation extends Activity {
 
     ProgressBar myProgressBar;
-    int myProgress = 0;
+    //int myProgress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,38 +44,11 @@ public class Foundation extends Activity {
         new ParseTask().execute();
 
         myProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        new Thread(myThread).start();
         myProgressBar.setVisibility(View.VISIBLE);
 
     }
 
-
-    private Runnable myThread = new Runnable() {
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            while (myProgress < 100) {
-                try {
-                    myHandle.sendMessage(myHandle.obtainMessage());
-                    Thread.sleep(10);
-                } catch (Throwable t) {
-                }
-            }
-
-        }
-
-        Handler myHandle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                // TODO Auto-generated method stub
-                myProgress++;
-                myProgressBar.setProgress(myProgress);
-                if (myProgress==100){myProgressBar.setVisibility(View.INVISIBLE);}
-            }
-        };
-    };
-
-    private class ParseTask extends AsyncTask<Void, Void, String> {
+    private class ParseTask extends AsyncTask<Void, Integer, String> {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -108,11 +82,15 @@ public class Foundation extends Activity {
             return resultJson;
         }
 
+
         @Override
         protected void onPostExecute(String strJson) {
             super.onPostExecute(strJson);
 
             JSONObject dataJsonObj = null;
+
+            myProgressBar.setProgress(100);
+            myProgressBar.setVisibility(View.INVISIBLE);
 
             try {
                 dataJsonObj = new JSONObject(strJson);
@@ -202,6 +180,9 @@ public class Foundation extends Activity {
             try {
                 ImageView myimage2 = new ImageView(getApplicationContext());
                 new LoadImagefromUrl().execute(myimage2, str);
+                myimage2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                myimage2.setPadding(0,0,0,0);
+                myimage2.setAdjustViewBounds(true);
                 linearLayout.addView(myimage2);
             } catch (Exception e) {
             }
