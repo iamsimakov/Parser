@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -185,9 +186,10 @@ public class Foundation extends Activity {
 
         if (typeofwidget.equals("imageview")) { //если на входе нам передали картинку
             try {
-                final ImageView myimage2 = new ImageView(getApplicationContext()); //создаем переменную imageview-типа
+                ImageView myimage2 = new ImageView(getApplicationContext()); //создаем переменную imageview-типа
                 new LoadImagefromUrl().execute(myimage2, str); // AsyncTask по загрузке картинки
-                myimage2.setScaleType(ImageView.ScaleType.CENTER_CROP); //ставим заполнение полученной картинки
+                //myimage2.setScaleType(ImageView.ScaleType.CENTER_CROP); //ставим заполнение полученной картинки
+
                 linearLayout.addView(myimage2); //создаем Imageview
             } catch (Exception e) {
             }
@@ -208,7 +210,18 @@ public class Foundation extends Activity {
         @Override
         protected void onPostExecute( Bitmap result ) {
             super.onPostExecute( result );
-            ivPreview.setImageBitmap( result );
+            //ivPreview.setMinimumHeight(300);
+            Display display = getWindowManager().getDefaultDisplay();
+            DisplayMetrics metricsB = new DisplayMetrics();
+            display.getMetrics(metricsB);
+            try {
+                int height = result.getHeight();
+                int width = result.getWidth();
+                height = (int)(height * (metricsB.widthPixels/(float)width));
+                ivPreview.getLayoutParams().height = height;
+                ivPreview.setImageBitmap(result);
+                //addWidget("textview", String.valueOf(result.getWidth())+"x"+String.valueOf(result.getHeight()), 1);
+            } catch (Exception e){}
         }
     }
 
