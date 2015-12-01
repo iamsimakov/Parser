@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">News Parser</string>
 
-    <string name="hello_world">Всем привет!</string>
+    <string name="labelButtonStart">СТАРТ</string>
     <string name="action_settings">Settings</string>
     <string name="sec_lay">Это второй слой</string>
     <string name="out_text">Результат</string>
