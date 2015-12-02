@@ -39,7 +39,6 @@ public class Foundation extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foundation);
         new ParseTask().execute();
@@ -53,7 +52,6 @@ public class Foundation extends Activity {
             stackTrace += element.toString() + "\t\n";
         }
         addWidget("textview", stackTrace, 0);
-
     }
 
     private class ParseTask extends AsyncTask<Void, Integer, String> {

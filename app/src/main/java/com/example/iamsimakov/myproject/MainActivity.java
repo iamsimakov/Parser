@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 Intent found = new Intent(getApplicationContext(), Foundation.class);
                 startActivity(found);
             }
